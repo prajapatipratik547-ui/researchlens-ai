@@ -32,6 +32,7 @@ An AI research intelligence platform: upload multiple documents (PDF, DOCX, TXT)
 ```
 backend/            Express API (src/), tests (tests/)
 frontend/           npm workspaces: apps/web (React app), packages/shared (API contract as Zod schemas)
+demo-data/          sample sources (DEMO DATA) to try the app; see demo-data/README.md
 render.yaml         Render deployment for the backend
 ```
 
