@@ -1,0 +1,183 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/geist';
+@import '@fontsource-variable/geist-mono';
+
+/* Design tokens sampled from the Claude Design recording. */
+@theme {
+  --font-sans: 'Geist Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'Geist Mono Variable', ui-monospace, monospace;
+
+  /* Surfaces */
+  --color-ink: #0a0a0d;
+  --color-ink-2: #111116;
+  --color-ink-3: #1a1a21;
+  --color-paper: #edecef;
+  --color-paper-2: #f6f5f8;
+
+  /* Brand violet ramp */
+  --color-violet-50: #efe6ff;
+  --color-violet-200: #c9a9ff;
+  --color-violet-300: #b48cff;
+  --color-violet-500: #7a2ff0;
+  --color-violet-600: #6b1bb3;
+  --color-violet-700: #4a0fa0;
+  --color-violet-800: #2a0660;
+  --color-violet-900: #16033a;
+
+  /* Accents used by work / library tiles */
+  --color-mint: #3fa58c;
+  --color-ember: #c47a3c;
+  --color-lime: #b6d34a;
+  --color-live: #c6f05a;
+
+  /* Evidence status — fixed by the ResearchLens integration guide. Always pair with an icon + word. */
+  --color-support: #059669;
+  --color-contradict: #e11d48;
+  --color-unclear: #d97706;
+  --color-no-evidence: #94a3b8;
+
+  --radius-panel: 28px;
+  --radius-card: 22px;
+
+  --tracking-display: -0.045em;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+  html {
+    background: var(--color-ink);
+    color-scheme: dark;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    font-family: var(--font-sans);
+    background: var(--color-ink);
+    color: white;
+    overflow-x: clip;
+  }
+  ::selection {
+    background: var(--color-violet-300);
+    color: var(--color-ink);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-violet-300);
+    outline-offset: 3px;
+  }
+}
+
+/* Lenis smooth scroll */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis:not(.lenis-autoToggle).lenis-stopped {
+  overflow: clip;
+}
+
+@layer components {
+  .display {
+    letter-spacing: var(--tracking-display);
+    line-height: 0.92;
+    font-weight: 500;
+  }
+  /* Rounded full-bleed panel inset from the viewport edge. */
+  .panel {
+    border-radius: var(--radius-panel);
+    overflow: clip;
+    isolation: isolate;
+  }
+  .grain::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.08;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .glass {
+    background: linear-gradient(180deg, rgb(255 255 255 / 0.09), rgb(255 255 255 / 0.03));
+    border: 1px solid rgb(255 255 255 / 0.1);
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+  }
+  .text-silver {
+    background: linear-gradient(180deg, #ffffff 10%, #bdbcc4 90%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .text-smoke {
+    background: linear-gradient(180deg, #8a8993 0%, #3b3a42 95%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .conic-chrome {
+    background:
+      radial-gradient(circle at 50% 50%, rgb(255 255 255 / 0.35), transparent 40%),
+      conic-gradient(from 20deg at 55% 50%, #6f6f76, #f2f2f4, #8d8d94, #e6e6ea, #5d5d63, #d8d8dc, #7a7a80, #f5f5f7, #6f6f76);
+  }
+}
+
+@keyframes segment {
+  0% { transform: scaleX(0); }
+  45%, 100% { transform: scaleX(1); }
+}
+@keyframes float {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, -10px, 0); }
+}
+
+/* Research brief (react-markdown output). */
+.brief {
+  color: rgb(255 255 255 / 0.78);
+  font-size: 15px;
+  line-height: 1.7;
+}
+.brief h1 {
+  font-size: clamp(26px, 3vw, 36px);
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  font-weight: 500;
+  color: white;
+  margin-bottom: 1.25rem;
+}
+.brief h2 {
+  margin-top: 2.25rem;
+  margin-bottom: 0.75rem;
+  font-size: 13px;
+  font-family: var(--font-mono);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-violet-200);
+}
+.brief p + p {
+  margin-top: 0.75rem;
+}
+.brief ul {
+  list-style: disc;
+  padding-left: 1.25rem;
+}
+.brief li + li {
+  margin-top: 0.4rem;
+}
+.brief strong {
+  color: white;
+  font-weight: 500;
+}
+.brief a {
+  color: var(--color-violet-200);
+  text-decoration: underline;
+}
+
+/* Horizontal strips that scroll by touch/trackpad without a visible bar. */
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

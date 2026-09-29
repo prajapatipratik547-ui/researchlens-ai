@@ -1,0 +1,27 @@
+# Render Blueprint for the ResearchLens API (free web service).
+# Secrets are marked sync: false: Render asks for them when the Blueprint is
+# created, and they are never stored in this repository.
+services:
+  - type: web
+    name: researchlens-api
+    runtime: node
+    plan: free
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: JWT_EXPIRES_IN
+        value: 7d
+      - key: AI_PROVIDER
+        value: gemini
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: CLIENT_URL
+        sync: false

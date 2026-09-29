@@ -17,6 +17,10 @@ backend/uploads/
 # Local development database created by `npm run dev:local`
 backend/.local-db/
 
+# Local-only copies (the previous frontend is in git history)
+_old-frontend/
+friend-frontend/
+
 # Logs and OS noise
 *.log
 npm-debug.log*

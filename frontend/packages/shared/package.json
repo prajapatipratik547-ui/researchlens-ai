@@ -1,0 +1,16 @@
+{
+  "name": "@synapse/shared",
+  "private": true,
+  "version": "0.1.0",
+  "description": "ResearchLens API contract: Zod schemas + inferred types shared by apps/web and apps/api.",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "zod": "^4.0.0"
+  }
+}
