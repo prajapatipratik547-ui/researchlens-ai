@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+
+# Environment files: secrets never leave the machine
+.env
+.env.*
+!.env.example
+
+# Build output
+dist/
+build/
+coverage/
+
+# Uploaded documents stored locally in development
+backend/uploads/
+
+# Local development database created by `npm run dev:local`
+backend/.local-db/
+
+# Logs and OS noise
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/*
+!.vscode/extensions.json
+.idea/
